@@ -1,7 +1,7 @@
     .globl    calc                      ## -- Begin function calc
 
     ## (see function definition in main.c)
-    ## calc(int a <%edi>, int b <%esdi>) {...}
+    ## calc(int a <%edi>, int b <%esi>) {...}
 
 calc:                                   ## @calc
     pushq    %rbp
