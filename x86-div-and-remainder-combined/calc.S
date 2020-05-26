@@ -1,29 +1,30 @@
 	.globl	_calc                   ## -- Begin function calc
 
     ## not sure why underscore as prefix is needed
+    ## (see function definition in main.c)
+    ## calc(int a <%edi>, int b <%esdi>) {...}
+
 _calc:                                  ## @calc
 	pushq	%rbp
 	movq	%rsp, %rbp
+	                                    
+	movl	%edi, %edx                  ## int a (first arg) in eax 
 	
-	## int a = 7
-	movl	$12, -4(%rbp)
+	cltd                                ## int to long
+	                                    ## in case (its signed and) negative we extend the first bit to keep the num negative
+	                                    ## https://stackoverflow.com/questions/17170388/trying-to-understand-the-assembly-instruction-cltd-on-x86
 
-	## int b = 5
-	movl	$5, -8(%rbp)
-
-	movl	-4(%rbp), %eax
-	cltd
-	idivl	-8(%rbp)
-
-    ## division result is in in %edx
-    ## remainder is in %eax
+	                                    ## value in %eax divided by int b (second arg) which is given in %esi
+	                                    ## result is stored in %eax
+	idivl	%esi
+                                        ## division result is in %eax
+                                        ## remainder is in %edx
     
-    ## add value in edx to value in eax; should be 3
-    ## resultig function is
-    ## int c = a / b;
-    ## int d = a % b;
-    ## return (c + d) (via %eax)
-    addl    %edx, %eax
+    addl    %edx, %eax                  ## add value in edx to value in eax
+                                        ## resulting function is
+                                        ## int c = a / b;
+                                        ## int d = a % b;
+                                        ## return (c + d) (via %eax)
 	
 	popq	%rbp
 	retq
