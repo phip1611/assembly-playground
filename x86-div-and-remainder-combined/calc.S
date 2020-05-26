@@ -1,21 +1,21 @@
-	.globl	calc                   		## -- Begin function calc
+    .globl    calc                      ## -- Begin function calc
 
     ## (see function definition in main.c)
     ## calc(int a <%edi>, int b <%esdi>) {...}
 
-calc:                                 	## @calc
-	pushq	%rbp
-	movq	%rsp, %rbp
-	                                    
-	movl	%edi, %edx                  ## int a (first arg) in eax 
-	
-	cltd                                ## int to long
-	                                    ## in case (its signed and) negative we extend the first bit to keep the num negative
-	                                    ## https://stackoverflow.com/questions/17170388/trying-to-understand-the-assembly-instruction-cltd-on-x86
+calc:                                   ## @calc
+    pushq    %rbp
+    movq    %rsp, %rbp
+                                        
+    movl    %edi, %edx                  ## int a (first arg) in eax 
+    
+    cltd                                ## int to long
+                                        ## in case (its signed and) negative we extend the first bit to keep the num negative
+                                        ## https://stackoverflow.com/questions/17170388/trying-to-understand-the-assembly-instruction-cltd-on-x86
 
-	                                    ## value in %eax divided by int b (second arg) which is given in %esi
-	                                    ## result is stored in %eax
-	idivl	%esi
+                                        ## value in %eax divided by int b (second arg) which is given in %esi
+                                        ## result is stored in %eax
+    idivl    %esi
                                         ## division result is in %eax
                                         ## remainder is in %edx
     
@@ -24,7 +24,7 @@ calc:                                 	## @calc
                                         ## int c = a / b;
                                         ## int d = a % b;
                                         ## return (c + d) (via %eax)
-	
-	popq	%rbp
-	retq
+    
+    popq    %rbp
+    retq
                                         ## -- End function
