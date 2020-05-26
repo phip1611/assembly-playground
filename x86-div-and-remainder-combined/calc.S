@@ -1,10 +1,9 @@
-	.globl	_calc                   ## -- Begin function calc
+	.globl	calc                   		## -- Begin function calc
 
-    ## not sure why underscore as prefix is needed
     ## (see function definition in main.c)
     ## calc(int a <%edi>, int b <%esdi>) {...}
 
-_calc:                                  ## @calc
+calc:                                 	## @calc
 	pushq	%rbp
 	movq	%rsp, %rbp
 	                                    
