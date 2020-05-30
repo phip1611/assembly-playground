@@ -1,5 +1,5 @@
 main: main.c calc.S
-	gcc -o $@ -O0 $+
+	gcc -ggdb -O0 -o $@ -O0 $+
 
 .PHONY: clean
 
