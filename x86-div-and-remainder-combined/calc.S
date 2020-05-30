@@ -4,8 +4,9 @@
     ## calc(int a <%edi>, int b <%esi>) {...}
 
 calc:                                   ## @calc
-    pushq    %rbp
-    movq    %rsp, %rbp
+
+    ## pushq    %rbp 					## no need for saving stack pointer, because we do not need local memory
+    ## movq    %rsp, %rbp
                                         
     movl    %edi, %edx                  ## int a (first arg) in eax 
     
@@ -15,8 +16,8 @@ calc:                                   ## @calc
 
                                         ## value in %eax divided by int b (second arg) which is given in %esi
                                         ## result is stored in %eax
-    idivl    %esi
-                                        ## division result is in %eax
+                                        
+    idivl    %esi						## division result is in %eax
                                         ## remainder is in %edx
     
     addl    %edx, %eax                  ## add value in edx to value in eax
@@ -25,6 +26,6 @@ calc:                                   ## @calc
                                         ## int d = a % b;
                                         ## return (c + d) (via %eax)
     
-    popq    %rbp
+    #  popq    %rbp
     retq
                                         ## -- End function
