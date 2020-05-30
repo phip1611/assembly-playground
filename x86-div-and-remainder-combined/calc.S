@@ -8,7 +8,7 @@ calc:                                   ## @calc
     ## pushq    %rbp 					## no need for saving stack pointer, because we do not need local memory
     ## movq    %rsp, %rbp
                                         
-    movl    %edi, %edx                  ## int a (first arg) in eax 
+    movl    %edi, %eax                  ## int a (first arg) in eax 
     
     cltd                                ## int to long
                                         ## in case (its signed and) negative we extend the first bit to keep the num negative
